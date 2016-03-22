@@ -24,17 +24,14 @@ public class ApiManage {
                 subscribe(new Observer<NewsChannel>() {
                     @Override
                     public void onCompleted() {
-                        Log.d("denghang","onCompleted");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("denghang","onError");
                     }
 
                     @Override
                     public void onNext(NewsChannel newsChannel) {
-                        Log.d("denghang","onNext");
                         int resCode = newsChannel.getShowapi_res_code();
                         if (resCode == 0) {
                             List<NewsChannel.ShowapiResBodyEntity.ChannelListEntity> list = newsChannel.getShowapi_res_body().getChannelList();

@@ -1,7 +1,8 @@
 package yzxmz.com.cn.news.model.network;
 
 import android.content.Context;
-import android.util.Log;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import yzxmz.com.cn.news.model.bean.NewsData;
  * @author denghang
  * @version V1.0
  * @Package yzxmz.com.cn.news.model.network
- * @Description: (用一句话描述该文件做什么)
+ * @Description: 理论上应该是 不用eventbus 搞转发的，没有好的想法，同学们 开动你的小脑筋吧
  * @date 2016/3/16 14
  */
 public class ApiManage {
@@ -35,10 +36,11 @@ public class ApiManage {
                         int resCode = newsChannel.getShowapi_res_code();
                         if (resCode == 0) {
                             List<NewsChannel.ShowapiResBodyEntity.ChannelListEntity> list = newsChannel.getShowapi_res_body().getChannelList();
-                            for (int i = 0; i < list.size(); i++) {
+                           /* for (int i = 0; i < list.size(); i++) {
                                 NewsChannel.ShowapiResBodyEntity.ChannelListEntity entity = list.get(i);
                                 Log.d("denghang", i + ": entity" + entity.toString());
-                            }
+                            }*/
+                            EventBus.getDefault().post(list);
                         }
                     }
                 });
@@ -66,11 +68,12 @@ public class ApiManage {
                             if (code == 0) {
                                 NewsData.ShowapiResBodyEntity.PagebeanEntity entity = newsData.getShowapi_res_body().getPagebean();
                                 List<NewsData.ShowapiResBodyEntity.PagebeanEntity.ContentlistEntity> contentlist = entity.getContentlist();
-                                for (int i = 0; i < contentlist.size(); i++) {
+                                /*for (int i = 0; i < contentlist.size(); i++) {
                                     NewsData.ShowapiResBodyEntity.PagebeanEntity.ContentlistEntity contentlistEntity = contentlist.get(i);
                                     String title = contentlistEntity.getTitle();
                                     Log.d("denghang", title);
-                                }
+                                }*/
+                                EventBus.getDefault().post(contentlist);
                             }
                         }
                     }

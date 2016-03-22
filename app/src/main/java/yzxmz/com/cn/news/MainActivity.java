@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import yzxmz.com.cn.news.model.network.ApiManage;
@@ -36,5 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         setSupportActionBar(mToolbar);
+    }
+
+    @Subscribe
+    public void onEventMainThread(){
+
     }
 }

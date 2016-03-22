@@ -8,8 +8,11 @@ import android.support.v7.widget.Toolbar;
 
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import yzxmz.com.cn.news.model.bean.NewsChannel;
 import yzxmz.com.cn.news.model.network.ApiManage;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     TabLayout mTabLayout;
     @Bind(R.id.viewPager_main)
     ViewPager mViewPager;
+    private List<NewsChannel.ShowapiResBodyEntity.ChannelListEntity> mData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void onEventMainThread(){
+    public void onEventMainThread(List<NewsChannel.ShowapiResBodyEntity.ChannelListEntity> event) {
+        if (event != null) {
 
+        }
     }
 }

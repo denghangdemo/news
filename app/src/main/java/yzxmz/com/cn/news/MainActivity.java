@@ -47,12 +47,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         initToolbar();
+<<<<<<< cf9fa59302f7cc39faad096c42ccad293ad15b1c
 
+=======
+        mViewPager.setAdapter(new MainAdapter(getSupportFragmentManager()));
+        mTabLayout.setupWithViewPager(mViewPager);
+>>>>>>> 图片
     }
 
     private void initToolbar() {
         setSupportActionBar(mToolbar);
         mToolbar.setTitle("");
+<<<<<<< cf9fa59302f7cc39faad096c42ccad293ad15b1c
+=======
+        mToolbar.setLogo(R.mipmap.icon_lanmu_search);
+>>>>>>> 图片
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

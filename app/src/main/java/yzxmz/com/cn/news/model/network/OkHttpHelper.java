@@ -3,10 +3,14 @@ package yzxmz.com.cn.news.model.network;
 import android.content.Context;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * @author denghang
@@ -34,6 +38,13 @@ public class OkHttpHelper {
                             .readTimeout(READTIMEOUT, TimeUnit.SECONDS)
                             .writeTimeout(WRITETIMEOUT, TimeUnit.SECONDS)
                             .cache(new Cache(cache, MAXCACHERSIZE))
+                            .addInterceptor(new Interceptor() {
+                                @Override
+                                public Response intercept(Chain chain) throws IOException {
+                                    Request request = chain.request().newBuilder().addHeader("apikey","cec4e963be2a3073785eeaa9c3aa237f").build();
+                                    return chain.proceed(request);
+                                }
+                            })
                             .build();
                 }
             }

@@ -20,18 +20,21 @@ public class ApiManage {
 
     public static void getNewsChannel(Context context) {
         NetworkClient.createApi(context).
-                getNewsChannel("cec4e963be2a3073785eeaa9c3aa237f").
+                getNewsChannel().
                 subscribe(new Observer<NewsChannel>() {
                     @Override
                     public void onCompleted() {
+                        Log.d("denghang","onCompleted");
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.d("denghang","onError");
                     }
 
                     @Override
                     public void onNext(NewsChannel newsChannel) {
+                        Log.d("denghang","onNext");
                         int resCode = newsChannel.getShowapi_res_code();
                         if (resCode == 0) {
                             List<NewsChannel.ShowapiResBodyEntity.ChannelListEntity> list = newsChannel.getShowapi_res_body().getChannelList();
@@ -44,8 +47,9 @@ public class ApiManage {
                 });
     }
 
-    public static void getNewsDataByChannel(Context context) {
-        NetworkClient.createApi(context).getNewsData("cec4e963be2a3073785eeaa9c3aa237f", "5572a108b3cdc86cf39001cd", "1").
+    public static void getNewsDataByChannel(Context context, String channelId, String page) {
+        NetworkClient.createApi(context).
+                getNewsData(channelId, page).
                 subscribe(new Observer<NewsData>() {
                     @Override
                     public void onCompleted() {
@@ -68,7 +72,7 @@ public class ApiManage {
                                 for (int i = 0; i < contentlist.size(); i++) {
                                     NewsData.ShowapiResBodyEntity.PagebeanEntity.ContentlistEntity contentlistEntity = contentlist.get(i);
                                     String title = contentlistEntity.getTitle();
-                                    Log.d("denghang",title);
+                                    Log.d("denghang", title);
                                 }
                             }
                         }

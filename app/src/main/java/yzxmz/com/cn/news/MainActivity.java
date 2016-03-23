@@ -6,14 +6,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
-import java.util.List;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import yzxmz.com.cn.news.model.bean.NewsChannel;
+import yzxmz.com.cn.news.model.event.ChannelEvent;
 import yzxmz.com.cn.news.model.network.ApiManage;
+import yzxmz.com.cn.news.ui.adapter.MainAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,17 +24,21 @@ public class MainActivity extends AppCompatActivity {
     TabLayout mTabLayout;
     @Bind(R.id.viewPager_main)
     ViewPager mViewPager;
-    private List<NewsChannel.ShowapiResBodyEntity.ChannelListEntity> mData;
+    private MainAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        EventBus.getDefault().register(this);
         initView();
-
         initData();
+        initListener();
+    }
+
+    private void initListener() {
+
     }
 
     private void initData() {
@@ -41,13 +46,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        setSupportActionBar(mToolbar);
+        initToolbar();
+
     }
 
-    @Subscribe
-    public void onEventMainThread(List<NewsChannel.ShowapiResBodyEntity.ChannelListEntity> event) {
-        if (event != null) {
+    private void initToolbar() {
+        setSupportActionBar(mToolbar);
+        mToolbar.setTitle("");
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUserEvent(ChannelEvent event) {
+        if (event != null) {
+            event.list.toString();
+            mAdapter = new MainAdapter(getSupportFragmentManager(),event.list);
+            mViewPager.setAdapter(mAdapter);
+            mTabLayout.setupWithViewPager(mViewPager);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

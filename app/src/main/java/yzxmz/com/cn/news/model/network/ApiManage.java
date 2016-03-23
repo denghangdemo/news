@@ -1,14 +1,18 @@
 package yzxmz.com.cn.news.model.network;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import yzxmz.com.cn.news.model.bean.NewsChannel;
 import yzxmz.com.cn.news.model.bean.NewsData;
+import yzxmz.com.cn.news.model.event.ChannelEvent;
 
 /**
  * @author denghang
@@ -22,25 +26,27 @@ public class ApiManage {
     public static void getNewsChannel(Context context) {
         NetworkClient.createApi(context).
                 getNewsChannel().
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).
                 subscribe(new Observer<NewsChannel>() {
                     @Override
                     public void onCompleted() {
+                        Log.d("denghang", "onCompleted");
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.d("denghang", "onError");
                     }
 
                     @Override
                     public void onNext(NewsChannel newsChannel) {
+                        Log.d("denghang", "onNext");
                         int resCode = newsChannel.getShowapi_res_code();
                         if (resCode == 0) {
                             List<NewsChannel.ShowapiResBodyEntity.ChannelListEntity> list = newsChannel.getShowapi_res_body().getChannelList();
-                           /* for (int i = 0; i < list.size(); i++) {
-                                NewsChannel.ShowapiResBodyEntity.ChannelListEntity entity = list.get(i);
-                                Log.d("denghang", i + ": entity" + entity.toString());
-                            }*/
-                            EventBus.getDefault().post(list);
+
+                            EventBus.getDefault().post(new ChannelEvent(list));
                         }
                     }
                 });
@@ -68,7 +74,7 @@ public class ApiManage {
                             if (code == 0) {
                                 NewsData.ShowapiResBodyEntity.PagebeanEntity entity = newsData.getShowapi_res_body().getPagebean();
                                 List<NewsData.ShowapiResBodyEntity.PagebeanEntity.ContentlistEntity> contentlist = entity.getContentlist();
-                                /*for (int i = 0; i < contentlist.size(); i++) {
+/*                                for (int i = 0; i < contentlist.size(); i++) {
                                     NewsData.ShowapiResBodyEntity.PagebeanEntity.ContentlistEntity contentlistEntity = contentlist.get(i);
                                     String title = contentlistEntity.getTitle();
                                     Log.d("denghang", title);

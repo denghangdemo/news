@@ -13,6 +13,7 @@ import rx.schedulers.Schedulers;
 import yzxmz.com.cn.news.model.bean.NewsChannel;
 import yzxmz.com.cn.news.model.bean.NewsData;
 import yzxmz.com.cn.news.model.event.ChannelEvent;
+import yzxmz.com.cn.news.model.event.ContentlistEvent;
 
 /**
  * @author denghang
@@ -52,9 +53,11 @@ public class ApiManage {
                 });
     }
 
-    public static void getNewsDataByChannel(Context context, String channelId, String page) {
+    public static void getNewsDataByChannel(Context context, String channelId, int page) {
         NetworkClient.createApi(context).
                 getNewsData(channelId, page).
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).
                 subscribe(new Observer<NewsData>() {
                     @Override
                     public void onCompleted() {
@@ -74,12 +77,7 @@ public class ApiManage {
                             if (code == 0) {
                                 NewsData.ShowapiResBodyEntity.PagebeanEntity entity = newsData.getShowapi_res_body().getPagebean();
                                 List<NewsData.ShowapiResBodyEntity.PagebeanEntity.ContentlistEntity> contentlist = entity.getContentlist();
-/*                                for (int i = 0; i < contentlist.size(); i++) {
-                                    NewsData.ShowapiResBodyEntity.PagebeanEntity.ContentlistEntity contentlistEntity = contentlist.get(i);
-                                    String title = contentlistEntity.getTitle();
-                                    Log.d("denghang", title);
-                                }*/
-                                EventBus.getDefault().post(contentlist);
+                                EventBus.getDefault().post(new ContentlistEvent(contentlist));
                             }
                         }
                     }

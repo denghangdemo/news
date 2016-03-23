@@ -1,5 +1,6 @@
 package yzxmz.com.cn.news.ui.adapter;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -28,7 +29,9 @@ public class MainAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return new ViewPageMainFragment();
+        Bundle args = new Bundle();
+        args.putString("channelId",mData.get(position).getChannelId());
+        return ViewPageMainFragment.newInstance(args);
     }
 
     @Override

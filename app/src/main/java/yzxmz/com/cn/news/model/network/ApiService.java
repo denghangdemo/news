@@ -30,6 +30,6 @@ public interface ApiService {
      * @return
      */
     @GET("search_news")
-    Observable<NewsData> getNewsData(@Query("channelId") String channelId ,@Query("page") String page);
+    Observable<NewsData> getNewsData(@Query("channelId") String channelId ,@Query("page") int page);
 
 }

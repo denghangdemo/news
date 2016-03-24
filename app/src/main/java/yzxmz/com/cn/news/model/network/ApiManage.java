@@ -1,7 +1,6 @@
 package yzxmz.com.cn.news.model.network;
 
 import android.content.Context;
-import android.util.Log;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -32,21 +31,18 @@ public class ApiManage {
                 subscribe(new Observer<NewsChannel>() {
                     @Override
                     public void onCompleted() {
-                        Log.d("denghang", "onCompleted");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("denghang", "onError");
                     }
 
                     @Override
                     public void onNext(NewsChannel newsChannel) {
-                        Log.d("denghang", "onNext");
                         int resCode = newsChannel.getShowapi_res_code();
                         if (resCode == 0) {
                             List<NewsChannel.ShowapiResBodyEntity.ChannelListEntity> list = newsChannel.getShowapi_res_body().getChannelList();
-
+                            // TODO: 2016/3/24  写数据库
                             EventBus.getDefault().post(new ChannelEvent(list));
                         }
                     }
@@ -77,6 +73,7 @@ public class ApiManage {
                             if (code == 0) {
                                 NewsData.ShowapiResBodyEntity.PagebeanEntity entity = newsData.getShowapi_res_body().getPagebean();
                                 List<NewsData.ShowapiResBodyEntity.PagebeanEntity.ContentlistEntity> contentlist = entity.getContentlist();
+                                // TODO: 2016/3/24 写数据库 
                                 EventBus.getDefault().post(new ContentlistEvent(contentlist));
                             }
                         }

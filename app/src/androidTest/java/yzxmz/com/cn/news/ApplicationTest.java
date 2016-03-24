@@ -18,6 +18,6 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     }
 
     public void testNewsData(){
-        ApiManage.getNewsDataByChannel(getContext(),"5572a108b3cdc86cf39001cd", "1");
+        ApiManage.getNewsDataByChannel(getContext(),"5572a108b3cdc86cf39001cd", 1);
     }
 }

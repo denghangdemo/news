@@ -1,5 +1,6 @@
 package yzxmz.com.cn.news.model.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,9 +10,9 @@ import java.util.List;
  * @Description: (用一句话描述该文件做什么)
  * @date 2016/3/21 15
  */
-public class NewsData {
+public class NewsData implements Serializable{
 
-
+    private static final long serialVersionUID = 1L;
     /**
      * showapi_res_code : 0
      * showapi_res_error :

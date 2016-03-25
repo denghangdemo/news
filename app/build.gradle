@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 23
@@ -11,6 +10,8 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+
     }
     buildTypes {
         release {
@@ -22,14 +23,18 @@ android {
 
 }
 
+packagingOptions { exclude 'META-INF/services/javax.annotation.processing.Processor' }
+
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
-        classpath "io.realm:realm-gradle-plugin:0.88.0"
+        classpath "io.realm:realm-gradle-plugin:0.88.2"
     }
 }
+
+apply plugin: 'realm-android'
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')

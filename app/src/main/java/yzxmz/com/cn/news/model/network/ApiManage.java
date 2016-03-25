@@ -42,14 +42,15 @@ public class ApiManage {
                         int resCode = newsChannel.getShowapi_res_code();
                         if (resCode == 0) {
                             List<NewsChannel.ShowapiResBodyEntity.ChannelListEntity> list = newsChannel.getShowapi_res_body().getChannelList();
-                            // TODO: 2016/3/24  写数据库
                             EventBus.getDefault().post(new ChannelEvent(list));
+                            // TODO: 2016/3/24  写数据库
+                            //DatabaseHelper.storeChannelData(list);
                         }
                     }
                 });
     }
 
-    public static void getNewsDataByChannel(Context context, String channelId, int page) {
+    public static void getNewsDataByChannel(Context context, final String channelId, int page) {
         NetworkClient.createApi(context).
                 getNewsData(channelId, page).
                 subscribeOn(Schedulers.io()).
@@ -73,7 +74,8 @@ public class ApiManage {
                             if (code == 0) {
                                 NewsData.ShowapiResBodyEntity.PagebeanEntity entity = newsData.getShowapi_res_body().getPagebean();
                                 List<NewsData.ShowapiResBodyEntity.PagebeanEntity.ContentlistEntity> contentlist = entity.getContentlist();
-                                // TODO: 2016/3/24 写数据库 
+                                // TODO: 2016/3/24 写数据库
+                                //DatabaseHelper.storeNewsData(contentlist,channelId);
                                 EventBus.getDefault().post(new ContentlistEvent(contentlist));
                             }
                         }

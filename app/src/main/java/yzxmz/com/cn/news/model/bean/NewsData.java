@@ -170,6 +170,25 @@ public class NewsData implements Serializable{
 
                 private List<ImageurlsEntity> imageurls;
 
+                @Override
+                public String toString() {
+                    return "ContentlistEntity{" +
+                            "channelId='" + channelId + '\'' +
+                            ", channelName='" + channelName + '\'' +
+                            ", desc='" + desc + '\'' +
+                            ", link='" + link + '\'' +
+                            ", long_desc='" + long_desc + '\'' +
+                            ", nid='" + nid + '\'' +
+                            ", pubDate='" + pubDate + '\'' +
+                            ", sentiment_display=" + sentiment_display +
+                            ", sentiment_tag=" + sentiment_tag +
+                            ", source='" + source + '\'' +
+                            ", tags=" + tags +
+                            ", title='" + title + '\'' +
+                            ", imageurls=" + imageurls +
+                            '}';
+                }
+
                 public void setChannelId(String channelId) {
                     this.channelId = channelId;
                 }
@@ -338,6 +357,19 @@ public class NewsData implements Serializable{
                     public String getType() {
                         return type;
                     }
+
+                    @Override
+                    public String toString() {
+                        return "SentimentTagEntity{" +
+                                "count='" + count + '\'' +
+                                ", dim='" + dim + '\'' +
+                                ", id='" + id + '\'' +
+                                ", isbooked=" + isbooked +
+                                ", ishot='" + ishot + '\'' +
+                                ", name='" + name + '\'' +
+                                ", type='" + type + '\'' +
+                                '}';
+                    }
                 }
 
                 public static class TagsEntity {
@@ -348,6 +380,14 @@ public class NewsData implements Serializable{
 
                     private List<OwnEntity> own;
                     private List<String> tag;
+
+                    @Override
+                    public String toString() {
+                        return "TagsEntity{" +
+                                "own=" + own +
+                                ", tag=" + tag +
+                                '}';
+                    }
 
                     public void setOwn(List<OwnEntity> own) {
                         this.own = own;
@@ -368,6 +408,14 @@ public class NewsData implements Serializable{
                     public static class OwnEntity {
                         private String name;
                         private int type;
+
+                        @Override
+                        public String toString() {
+                            return "OwnEntity{" +
+                                    "name='" + name + '\'' +
+                                    ", type=" + type +
+                                    '}';
+                        }
 
                         public void setName(String name) {
                             this.name = name;
@@ -391,6 +439,15 @@ public class NewsData implements Serializable{
                     private int height;
                     private String url;
                     private int width;
+
+                    @Override
+                    public String toString() {
+                        return "ImageurlsEntity{" +
+                                "height=" + height +
+                                ", url='" + url + '\'' +
+                                ", width=" + width +
+                                '}';
+                    }
 
                     public void setHeight(int height) {
                         this.height = height;

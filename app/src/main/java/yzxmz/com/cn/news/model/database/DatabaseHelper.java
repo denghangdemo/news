@@ -8,10 +8,10 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Observable;
 import rx.Subscriber;
-import yzxmz.com.cn.news.model.bean.CacheData;
 import yzxmz.com.cn.news.model.bean.NewsChannel;
-import yzxmz.com.cn.news.model.bean.NewsChannelData;
 import yzxmz.com.cn.news.model.bean.NewsData;
+import yzxmz.com.cn.news.model.database.domain.CacheData;
+import yzxmz.com.cn.news.model.database.domain.NewsChannelData;
 
 /**
  * Created by dengh on 2016/3/24.
@@ -24,15 +24,17 @@ public class DatabaseHelper {
             public void call(Subscriber<? super Void> subscriber) {
                 Realm realm = Realm.getDefaultInstance();
                 for (int i = 0; i < list.size(); i++) {
+                    long time = System.currentTimeMillis();
                     realm.beginTransaction();
                     NewsChannelData channelData = realm.createObject(NewsChannelData.class);
                     channelData.setChannelId(list.get(i).getChannelId());
                     channelData.setName(list.get(i).getName());
                     channelData.setPosition(i);
+                    channelData.setTime(time);
                     realm.commitTransaction();
                 }
-                subscriber.onCompleted();
                 realm.close();
+                subscriber.onCompleted();
             }
         });
     }
@@ -42,12 +44,12 @@ public class DatabaseHelper {
             @Override
             public void call(Subscriber<? super NewsChannelData> subscriber) {
                 Realm realm = Realm.getDefaultInstance();
-                RealmResults<NewsChannelData> results = realm.where(NewsChannelData.class).findAllSorted("position");
+                RealmResults<NewsChannelData> results = realm.where(NewsChannelData.class).findAll();
                 for (NewsChannelData data : results) {
                     subscriber.onNext(data);
                 }
-                subscriber.onCompleted();
                 realm.close();
+                subscriber.onCompleted();
             }
         });
     }

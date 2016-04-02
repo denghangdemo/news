@@ -1,4 +1,4 @@
-package yzxmz.com.cn.news.model.bean;
+package yzxmz.com.cn.news.model.database.domain;
 
 import io.realm.RealmObject;
 
@@ -6,7 +6,7 @@ import io.realm.RealmObject;
  * @author denghang
  * @version V1.0
  * @Package yzxmz.com.cn.news.model.bean
- * @Description: (用一句话描述该文件做什么)
+ * @Description: realm 只能有getter 与 setter 方法
  * @date 2016/3/25 10
  */
 public class NewsChannelData extends RealmObject {
@@ -14,6 +14,7 @@ public class NewsChannelData extends RealmObject {
     private String channelId; // 频道ID
     private String name; // 频道名称
     private int position; // 位置（频道排序）
+    private long time; // 时间
 
     public String getChannelId() {
         return channelId;
@@ -39,4 +40,11 @@ public class NewsChannelData extends RealmObject {
         this.position = position;
     }
 
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
 }

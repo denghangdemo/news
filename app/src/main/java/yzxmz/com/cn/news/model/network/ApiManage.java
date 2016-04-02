@@ -23,6 +23,43 @@ import yzxmz.com.cn.news.model.event.ContentlistEvent;
  */
 public class ApiManage {
 
+/*    public static void getNewsChannel(Context context) {
+        NetworkClient.createApi(context).
+                getNewsChannel().
+                map(new Func1<NewsChannel, List>() {
+
+                    @Override
+                    public List call(NewsChannel newsChannel) {
+                        List<NewsChannel.ShowapiResBodyEntity.ChannelListEntity> list = new ArrayList<NewsChannel.ShowapiResBodyEntity.ChannelListEntity>();
+                        int code = newsChannel.getShowapi_res_code();
+                        if (code == 0) {
+                            list = newsChannel.getShowapi_res_body().getChannelList();
+                        }
+                        return list;
+                    }
+                }).
+                subscribe(new Observer<List>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List list) {
+                        for (int i = 0; i < list.size(); i++) {
+                            NewsChannel.ShowapiResBodyEntity.ChannelListEntity data = (NewsChannel.ShowapiResBodyEntity.ChannelListEntity) list.get(i);
+                            String name = data.getName();
+                            Log.d("denghang", name);
+                        }
+                    }
+                });
+    }*/
+
     public static void getNewsChannel(Context context) {
         NetworkClient.createApi(context).
                 getNewsChannel().

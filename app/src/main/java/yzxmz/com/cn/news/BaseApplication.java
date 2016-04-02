@@ -2,6 +2,9 @@ package yzxmz.com.cn.news;
 
 import android.app.Application;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 /**
  * @author denghang
  * @version V1.0
@@ -9,12 +12,12 @@ import android.app.Application;
  * @Description: (用一句话描述该文件做什么)
  * @date 2016/3/25 09
  */
-public class BaseApplication extends Application{
+public class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
-       /* RealmConfiguration config = new RealmConfiguration.Builder(this).build();
-        Realm.setDefaultConfiguration(config);*/
+        RealmConfiguration config = new RealmConfiguration.Builder(this).build();
+        Realm.setDefaultConfiguration(config);
     }
 }

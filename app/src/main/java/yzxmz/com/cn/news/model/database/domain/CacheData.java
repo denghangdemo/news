@@ -1,4 +1,4 @@
-package yzxmz.com.cn.news.model.bean;
+package yzxmz.com.cn.news.model.database.domain;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Required;

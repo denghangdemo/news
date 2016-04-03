@@ -22,7 +22,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'io.realm:realm-android:0.84.1'
     compile 'com.squareup.retrofit2:retrofit:2.0.0'

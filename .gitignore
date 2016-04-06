@@ -9,7 +9,6 @@ gradlew.bat
 
 # Gradle files
 .gradle/
-build/
 /*/build/
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)

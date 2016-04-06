@@ -1,8 +1,19 @@
 *.iml
 .gradle
-gradle
 local.properties
-build
+build/
 .idea
 gradlew
 gradlew.bat
+
+
+# Gradle files
+.gradle/
+build/
+/*/build/
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+## Directory-based project format:
+.idea/

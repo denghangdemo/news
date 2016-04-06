@@ -18,22 +18,23 @@ public class ViewPagerPresenter {
         mViewPagerView = viewPagerView;
     }
 
-    public void getContentNews(Context context,String channelId,int page) {
-        ApiManage.getNewsDataByChannel(context, channelId, page).subscribe(new Observer<List<NewsData.ShowapiResBodyEntity.PagebeanEntity.ContentlistEntity>>() {
-            @Override
-            public void onCompleted() {
+    public void getContentNews(Context context, String channelId, int page) {
+        ApiManage.getNewsDataByChannel(context, channelId, page).
+                subscribe(new Observer<List<NewsData.ShowapiResBodyEntity.PagebeanEntity.ContentlistEntity>>() {
+                    @Override
+                    public void onCompleted() {
 
-            }
+                    }
 
-            @Override
-            public void onError(Throwable e) {
+                    @Override
+                    public void onError(Throwable e) {
 
-            }
+                    }
 
-            @Override
-            public void onNext(List<NewsData.ShowapiResBodyEntity.PagebeanEntity.ContentlistEntity> list) {
-                mViewPagerView.showListItem(list);
-            }
-        });
+                    @Override
+                    public void onNext(List<NewsData.ShowapiResBodyEntity.PagebeanEntity.ContentlistEntity> list) {
+                        mViewPagerView.showListItem(list);
+                    }
+                });
     }
 }
